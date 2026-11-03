@@ -1,61 +1,96 @@
-# Inference for Correlation: A Simulation Study
+# 📊 Inference for Correlation: A Simulation Study
 
-A simulation-based comparison of three asymptotic methods for inference on the population correlation coefficient, focusing on normal approximation, hypothesis-testing power, and confidence interval performance using R.
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-R-blue?logo=r" />
+  <img src="https://img.shields.io/badge/Statistical%20Computing-Simulation-purple" />
+  <img src="https://img.shields.io/badge/Course-SDS755-orange" />
+  <img src="https://img.shields.io/badge/Status-Completed-success" />
+</p>
 
-## Overview
+<p align="center">
+  <i>A Monte Carlo simulation study comparing asymptotic methods for inference on the population correlation coefficient.</i>
+</p>
 
-Inference for the population correlation coefficient is challenging because its sampling distribution has a complicated structure. This project investigates three asymptotic approaches to address this difficulty and evaluates their finite-sample performance through Monte Carlo simulations.
+---
 
-The study considers samples drawn from a **bivariate normal distribution** with varying sample sizes and population correlation coefficients.
+## 🔍 About the Project
 
-## Methods Compared
+Inference for the population correlation coefficient is challenging because of the complicated structure of its sampling distribution. This project explores three asymptotic approaches and investigates their finite-sample performance through Monte Carlo simulations.
 
-Three standardized statistics are investigated:
+The study considers samples generated from a **bivariate normal distribution** with different sample sizes and population correlation coefficients.
 
-- **T1 – Classical asymptotic approach:** Based on the asymptotic distribution of the sample correlation coefficient.
-- **T2 – Fisher's transformation:** Uses the variance-stabilizing Fisher transformation.
-- **T3 – Bias-corrected Fisher transformation:** Incorporates a bias correction to the Fisher-transformed statistic.
+## 🧮 Methods Under Investigation
 
-## Objectives
+Three standardized statistics are compared:
 
-The simulation study focuses on three aspects of statistical inference:
+| Statistic | Method | Description |
+|:---:|---|---|
+| **T₁** | Classical approach | Based on the asymptotic distribution of the sample correlation coefficient. |
+| **T₂** | Fisher's transformation | Uses a variance-stabilizing transformation. |
+| **T₃** | Bias-corrected Fisher transformation | Incorporates a bias correction into Fisher's transformed statistic. |
 
-1. **Normal Approximation:** Evaluates the closeness of the distributions of the three statistics to the standard normal distribution using the Kolmogorov–Smirnov (KS) distance.
-2. **Hypothesis Testing:** Compares the power of tests based on the three statistics under different null and alternative correlation values.
-3. **Confidence Intervals:** Examines empirical coverage probability and average interval length for the corresponding 95% confidence intervals.
+## 🎯 Objectives
 
-## Simulation Design
+The project investigates three important aspects of correlation inference:
 
-| Component | Simulation settings |
+### 1. 📈 Normal Approximation
+Evaluates the closeness of the distributions of T₁, T₂ and T₃ to the standard normal distribution using the **Kolmogorov–Smirnov (KS) distance**.
+
+### 2. ⚡ Hypothesis-Testing Power
+Compares the power of tests based on the three statistics under different null and alternative correlation values.
+
+### 3. 📐 Confidence Interval Analysis
+Evaluates the performance of the corresponding 95% confidence intervals using:
+- Empirical coverage probability
+- Average confidence interval length
+
+## ⚙️ Simulation Design
+
+| Component | Settings |
 |---|---|
-| Sample sizes | 10, 30, 50, 100, 500 (normal approximation); 10, 30, 50, 100 (other analyses) |
-| Population correlation | 0, 0.1, 0.3, 0.6, 0.9 (normal approximation) |
-| Replications | 5,000 (normal approximation and confidence intervals); 2,000 (power analysis) |
+| Sample sizes | 10, 30, 50, 100, 500 (normal approximation) |
+| Population correlations | 0, 0.1, 0.3, 0.6, 0.9 |
+| Replications | 5,000 (normal approximation and CI); 2,000 (power) |
 | Confidence level | 95% |
 | Significance level | 5% |
+| Data-generating distribution | Bivariate normal |
 
-## Key Findings
+## 💡 Key Findings
 
-- The bias-corrected statistic **T3** generally provides a better normal approximation, particularly for small samples and high population correlations.
-- Fisher-transformed approaches (**T2 and T3**) demonstrate better power in several small-sample settings.
-- Confidence intervals based on T2 and T3 generally maintain coverage closer to the nominal 95% level than those based on T1 in smaller samples.
+- **T₃** generally provides a better normal approximation, particularly for small sample sizes and high population correlations.
+- **T₂ and T₃** demonstrate better testing power in several small-sample settings.
+- Confidence intervals based on **T₂ and T₃** generally maintain coverage closer to the nominal 95% level than those based on T₁ for smaller samples.
 - The differences among the three approaches tend to diminish as the sample size increases.
 
-## Tools and Technologies
+## 🛠️ Tools & Technologies
 
-- **R** – Statistical computing and Monte Carlo simulation.
-- **MASS** – Generation of multivariate normal samples.
-- **tidyverse** – Data manipulation and visualization.
-- **ggplot2** – Graphical representation of simulation results.
-- **Quarto / LaTeX** – Report preparation and PDF generation.
+<p>
+  <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" />
+  <img src="https://img.shields.io/badge/ggplot2-447099?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/tidyverse-1A162D?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Quarto-39729E?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/LaTeX-008080?style=for-the-badge&logo=latex&logoColor=white" />
+</p>
 
-## References
+- **R:** Statistical computing and Monte Carlo simulation.
+- **MASS:** Generation of multivariate normal samples.
+- **tidyverse:** Data manipulation.
+- **ggplot2:** Data visualization.
+- **Quarto and LaTeX:** Report preparation.
+
+## 📚 References
 
 1. Gun, A. M., Gupta, M. K., and Dasgupta, B. *An Outline of Statistical Theory*, Volumes 1 and 2. World Press.
 2. Rice, J. A. (2007). *Mathematical Statistics and Data Analysis*, 3rd Edition. Thomson Brooks/Cole.
 
 ---
 
-**Course:** SDS755 – Statistical Inference  
-**Department:** Statistics and Data Science  
-**Institution:** Indian Institute of Technology Kanpur
+<p align="center">
+  <b>SDS755 · Statistical Inference</b><br/>
+  Department of Statistics and Data Science<br/>
+  Indian Institute of Technology Kanpur
+</p>
+
+<p align="center">
+  <i>Exploring statistical theory through simulation.</i>
+</p>
