@@ -1,4 +1,4 @@
-# 📊 Inference for Correlation: A Simulation Study
+# Inference for Correlation: A Simulation Study
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-R-blue?logo=r" />
@@ -12,13 +12,13 @@
 
 ---
 
-## 🔍 About the Project
+## About the Project
 
 Inference for the population correlation coefficient is challenging because of the complicated structure of its sampling distribution. This project explores three asymptotic approaches and investigates their finite-sample performance through Monte Carlo simulations.
 
 The study considers samples generated from a **bivariate normal distribution** with different sample sizes and population correlation coefficients.
 
-## 🧮 Methods Under Investigation
+## Methods Under Investigation
 
 Three standardized statistics are compared:
 
@@ -28,22 +28,22 @@ Three standardized statistics are compared:
 | **T₂** | Fisher's transformation | Uses a variance-stabilizing transformation. |
 | **T₃** | Bias-corrected Fisher transformation | Incorporates a bias correction into Fisher's transformed statistic. |
 
-## 🎯 Objectives
+## Objectives
 
 The project investigates three important aspects of correlation inference:
 
-### 1. 📈 Normal Approximation
+### 1. Normal Approximation
 Evaluates the closeness of the distributions of T₁, T₂ and T₃ to the standard normal distribution using the **Kolmogorov–Smirnov (KS) distance**.
 
-### 2. ⚡ Hypothesis-Testing Power
+### 2. Hypothesis-Testing Power
 Compares the power of tests based on the three statistics under different null and alternative correlation values.
 
-### 3. 📐 Confidence Interval Analysis
+### 3. Confidence Interval Analysis
 Evaluates the performance of the corresponding 95% confidence intervals using:
 - Empirical coverage probability
 - Average confidence interval length
 
-## ⚙️ Simulation Design
+## Simulation Design
 
 | Component | Settings |
 |---|---|
@@ -54,14 +54,14 @@ Evaluates the performance of the corresponding 95% confidence intervals using:
 | Significance level | 5% |
 | Data-generating distribution | Bivariate normal |
 
-## 💡 Key Findings
+## Key Findings
 
 - **T₃** generally provides a better normal approximation, particularly for small sample sizes and high population correlations.
 - **T₂ and T₃** demonstrate better testing power in several small-sample settings.
 - Confidence intervals based on **T₂ and T₃** generally maintain coverage closer to the nominal 95% level than those based on T₁ for smaller samples.
 - The differences among the three approaches tend to diminish as the sample size increases.
 
-## 🛠️ Tools & Technologies
+## Tools & Technologies
 
 <p>
   <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" />
@@ -77,7 +77,7 @@ Evaluates the performance of the corresponding 95% confidence intervals using:
 - **ggplot2:** Data visualization.
 - **Quarto and LaTeX:** Report preparation.
 
-## 📚 References
+## References
 
 1. Gun, A. M., Gupta, M. K., and Dasgupta, B. *An Outline of Statistical Theory*, Volumes 1 and 2. World Press.
 2. Rice, J. A. (2007). *Mathematical Statistics and Data Analysis*, 3rd Edition. Thomson Brooks/Cole.
