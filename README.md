@@ -83,13 +83,3 @@ Evaluates the performance of the corresponding 95% confidence intervals using:
 2. Rice, J. A. (2007). *Mathematical Statistics and Data Analysis*, 3rd Edition. Thomson Brooks/Cole.
 
 ---
-
-<p align="center">
-  <b>SDS755 · Statistical Inference</b><br/>
-  Department of Statistics and Data Science<br/>
-  Indian Institute of Technology Kanpur
-</p>
-
-<p align="center">
-  <i>Exploring statistical theory through simulation.</i>
-</p>
