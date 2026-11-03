@@ -4,7 +4,6 @@
   <img src="https://img.shields.io/badge/Language-R-blue?logo=r" />
   <img src="https://img.shields.io/badge/Statistical%20Computing-Simulation-purple" />
   <img src="https://img.shields.io/badge/Course-SDS755-orange" />
-  <img src="https://img.shields.io/badge/Status-Completed-success" />
 </p>
 
 <p align="center">
