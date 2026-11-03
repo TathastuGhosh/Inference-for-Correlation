@@ -54,13 +54,6 @@ Evaluates the performance of the corresponding 95% confidence intervals using:
 | Significance level | 5% |
 | Data-generating distribution | Bivariate normal |
 
-## Key Findings
-
-- **T₃** generally provides a better normal approximation, particularly for small sample sizes and high population correlations.
-- **T₂ and T₃** demonstrate better testing power in several small-sample settings.
-- Confidence intervals based on **T₂ and T₃** generally maintain coverage closer to the nominal 95% level than those based on T₁ for smaller samples.
-- The differences among the three approaches tend to diminish as the sample size increases.
-
 ## Tools & Technologies
 
 <p>
