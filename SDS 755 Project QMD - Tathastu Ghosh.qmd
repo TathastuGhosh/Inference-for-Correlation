@@ -1,0 +1,392 @@
+---
+title: ""
+subtitle: ""
+author: ""
+date: ""
+format:
+  pdf:
+    pdf-engine: pdflatex
+    documentclass: article
+    classoption: [10pt]
+    papersize: a4
+    geometry:
+      - top=1in
+      - bottom=1in
+      - left=2cm
+      - right=2cm
+    toc: false
+    number-sections: true
+    colorlinks: true
+    include-in-header:
+      - file: preamble.tex
+    keep-tex: true
+execute:
+  echo: true
+  cache: true
+  warning: false
+  message: false
+bibliography: references.bib
+nocite: |
+  @*
+---
+
+\pagenumbering{arabic}
+\pagestyle{plain}
+\begin{center}
+{\large\bfseries\textsc{SDS755: Statistical Inference}}\\[2pt]
+\rule{0.22\textwidth}{1.2pt}\\[10pt]
+
+{\color{MainColor}\LARGE\bfseries Topic : Inference for Correlation}\\[5pt]
+
+{\normalsize\textit{A Simulation Study}}\\[2pt]
+
+\rule{0.22\textwidth}{1.2pt}\\[5pt]
+
+{\large\bfseries\color{MainColor} Tathastu Ghosh}\\[4pt]
+Roll No. 261130604\\[4pt]
+Ph.D. 1st Year\\
+Department of Statistics and Data Science\\[3pt]
+Indian Institute of Technology, Kanpur
+\end{center}
+\vspace*{-0.2cm}
+\rule{\textwidth}{0.5pt}
+\vspace{1pt}
+\vspace*{-1.1cm}
+
+# Introduction
+
+The sample correlation coefficient is one of the most widely used statistics in applied work, but the inference for the population correlation coefficient based on its sample version is very difficult. Moreover, hypothesis testing for correlation coefficient is more complicated due to unavailability of its exact density/mass function (It is available for bivariate normal distribution, but that's too very intricate). That's why, most of the times we take help of some asymptotic ideas or normal approximation. \vspace*{-0.3cm}
+
+# Statistical Background
+
+Consider, $(X_1, Y_1),(X_2, Y_2), \ldots, (X_n, Y_n)$ be a random sample from a bivariate population having population correlation coefficient $\rho$ and sample correlation coefficient is denoted by $r$.
+
+It is known that, $\mathbb{E}(r) \simeq \rho$ and $\text{Var}(r) \simeq \frac{(1-\rho^2)^2}{n}$.
+
+Hence, for large $n$, $$T_1 = \frac{\sqrt{n}\;(r - \rho)}{(1-\rho^2)} \overset{d}{\longrightarrow} \mathcal{N}(0,1)$$ Fisher's transformation is used to make the variance stable. Then, $$T_2 = \sqrt{n-3}\;\left\{\frac{1}{2} \log\left(\frac{1+r}{1-r}\right) - \frac{1}{2} \log\left(\frac{1+\rho}{1-\rho}\right)\right\}\overset{a}{\sim} \mathcal{N}(0,1)$$ A.K. Gayen revised the first four moments of\footnote{$\text{tanh}^{-1}(x) = \frac{1}{2}\log\left(\frac{1+x}{1-x}\right)$} $Z = \frac{1}{2} \log\left(\frac{1+r}{1-r}\right)$ and bias corrected quantity is given as $$T_3 = \sqrt{n-3}\;\left\{\frac{1}{2} \log\left(\frac{1+r}{1-r}\right) - \frac{1}{2} \log\left(\frac{1+\rho}{1-\rho}\right)-\frac{\rho}{2(n-1)}\right\} \overset{a}{\sim} \mathcal{N}(0,1)$$ **Note** : $T_1,T_2$ and $T_3$ can be used as a test statistic for testing $H_0 : \rho = \rho_0$ against some suitable alternative, by replacing $\rho$ by $\rho_0$. \vspace*{-0.2cm}
+
+# Objectives
+
+- Our first aim is to comment on the **normal approximation** by $T_1,T_2$ and $T_3$ for several values of $\rho$ and $n$ (no. of samples). Kolmogorov-Smirnov(KS) distance will be used to measure the closeness. Several questions guide this investigation : how does normal approximation for all three of them behave when $\rho$ moves away from 0, how quickly does each approximation improve as $n$ grows and does VST improve the convergence.
+- Our second aim is **power comparison** of the tests based on the $T_1,T_2$ and $T_3$. Our objective is to observe how does the power of each test behave as the value in the alternative moves away towards right from the value in the null; also how does the power change with the value in the null.
+- Our third aim is to evaluate **confidence intervals** (CI) for $\rho$ based on $T_1, T_2$ and $T_3$. Empirical coverage probability and average length of CI will be used to compare the three procedures across several values of $\rho$ and $n$.
+
+# Simulation Design
+
+## Assessment of Normal Approximation
+
+The simulation study is designed as follows :
+
+1.  We considered a grid of $n$ and $\rho$ values. $n \in \{10, 30, 50, 100, 500\}$ and $\rho \in \{0, 0.1, 0.3, 0.6, 0.9\}$.
+2.  For each $(n, \rho)$ pair, we generate samples from standard bivariate normal distribution having correlation coefficient $\rho$ and $T_1, T_2$ and $T_3$ will be calculated based on that dataset.
+3.  This whole process is replicated for $R = 5000$ times. Then, for each $(n,\rho)$ pair, we have a vector of KS distances and the average distances are plotted.
+
+## Assessment from Simulated Power
+
+In this section, we will explore how does the power of the test based on $T_1, T_2$ and $T_3$ behave with the $n$ and the $\rho$ in the alternative. For simplicity, here at a time we will fix a value of $\rho$ at the null and in the alternative we look at few values greater than that value in the null. Hence, right tailed test will be appropriate here and $5\%$ level of significance is considered. Upper $0.05$ percentile point for standard normal distrbution is $1.645$. \vspace*{-0.2cm} $$\text{H}_0 : \rho = \rho_0 \;\;\;\;\;\text{ vs }\;\;\;\;\;\text{H}_1 : \rho = \rho_1 \;(>\rho_0)$$ \vspace*{-0.1cm} The grids of $n$ and $\rho_0$ are $\{10,30,50,100\}$ and $\{0.1,0.3,0.5,0.6,0.9\}$. For each of them in the alternative,we will consider 30 equispaced values in the correlation coefficient between $\rho_0$ and $1$. The steps to calculate simulated power are given below :
+
+1.  For each of the $n$ and value in the alternative $\rho_1$ pair, $n$ samples will be generated from standard bivariate normal distribution with correlation coefficient $\rho_1$.
+2.  $T_1, T_2$ and $T_3$ are calculated based on that sample and we reject that corresponding null hypothesis if the observed value is greater than $1.645$. We keep a track the null hypothesis is rejected or not.
+3.  This whole process is repeated for $R = 2000$ times, and the proportion of rejections of null hypothesis gives an estimate of power.
+4.  For each $(n,\rho_0)$ pair, the power curves will be shown.
+
+## Assessment from Simulated Confidence Interval
+
+In this study, our aim will be to make a comparative study among the confidence intervals obtained by $T_1, T_2$ and $T_3$. The grids of $n$ and $\rho$ are fixed with $n \in \{10,30,50,100\}$ and $\rho \in \{0,0.3,0.6,0.9\}$ respectively. The replication number is $R = 5000$ and confidence level is $0.95$ throughout the study.
+
+1.  For each $(n,\rho)$ pair, $n$ samples are drawn from standard bivariate normal distribution with correlation $\rho$.
+2.  We calculate the sample correlation $r$ and construct the three confidence intervals given by $T_1,T_2$ and $T_3$ will be obtained.
+3.  This whole process is repeated for $R$ times, hence for a particular $(n, \rho)$ pair, $R$ confidence intervals (CI) will be obtained. The average length of the CIs and the proportion of times the $\rho$ is in the CI are tabulated.
+
+# Simulation Results and Interpretations
+
+## Simulation Results for the Assessments of Normal Approximation
+
+```{r}
+library(tidyverse); library(MASS)     # necessary packages
+set.seed(901)
+R = 5000                              # replication number
+n_values = c(10, 30, 50, 100, 500)    # grid of n values
+
+# 0 is included below to observe the size of the test
+rho_values = c(0, 0.1, 0.3, 0.6, 0.9) # grid of rho values
+KS_results = data.frame()
+```
+
+```{r Simulation_Normality}
+#| output: false
+for (n in n_values) {
+  for (rho in rho_values) {
+    T_values = matrix(NA_real_, nrow = R, ncol = 3)
+    for (k in 1:R) {
+      Z = mvrnorm(n, mu = c(0, 0),Sigma = matrix(c(1,rho,rho,1),2,2)) # data generate
+      r = cor(Z[,1], Z[,2]) # correlation
+      g = atanh(r)     # 0.5*atan((1+r)/(1-r))
+      g0 = atanh(rho)  # 0.5*atan((1+rho)/(1-rho))
+      # Calculating three quantities
+      T1 = sqrt(n)*(r-rho)/(1-rho^2)       
+      T2 = sqrt(n-3)*(g-g0)
+      T3 = sqrt(n-3)*(g-g0-rho/(2*(n-1)))
+      T_values[k,] = c(T1, T2, T3)
+    }
+    
+    D = apply(T_values, 2, function(x) {
+      ks.test(x, "pnorm")$statistic
+    }) # finding KS statistic for each quantity
+    
+    KS_results = rbind(KS_results, 
+                       data.frame(n = n,rho = rho,Statistic = paste0("T", 1:3),
+                                              KS_Distance = as.numeric(D)))
+  }
+}
+print(KS_results)
+```
+
+```{r Asymp_Norm_Plot}
+#| fig-cap: "Plots of average KS distance against n for several values of population correlation coefficient"
+#| fig-width: 5
+#| fig-height: 4
+#| fig-align: center
+
+ggplot(KS_results, aes(x = n, y = KS_Distance, 
+                       colour = Statistic, group = Statistic)) +
+  geom_line(linewidth = 0.8) + geom_point(size = 1) +
+  scale_x_log10(breaks = n_values) +
+  facet_wrap(~ rho, ncol = 2,
+             labeller = label_bquote(rho == .(rho))) +
+  labs(x = "Sample size", y = "KS distance", colour = "Statistic") + theme_bw()
+```
+
+\vspace*{-0.4cm}
+
+**Interpretations** :
+
+- For $\rho = 0$, $T_2$ and $T_3$ are identical. And, it can be observed that for any value of $\rho$ as $n$ increases KS distance reduces in most of the cases.
+- For small and moderate values of $\rho$, the KS distance lines lie close together.
+- As $\rho$ increases towards $1$, the gaps between the lines widen specifically for smaller $n$. But as $n$ increases, the behavior is pretty same for all of the lines.
+- This substantial difference at high $\rho$ and small $n$ is one of the key findings. It shows that, $T_3$ attains a much smaller KS distance on average than the other two. Therefore, the bias-corrected expression $T_3$ converges to normality more rapidly.
+- Overall, $T_3$ seems to work little better for moderate $\rho$. But for large $\rho$, $T_3$ outperforms others.
+
+## Simulation Results for the Power Comparison
+
+Our idea is to create a function which takes value in the null, grids of $n$ and $R$ as arguments. Then we will repeat that function for several values of $\rho_0$.
+
+```{r Simulation_Power_Function}
+library(MASS);library(tidyr);library(ggplot2)
+set.seed(901)
+run_power = function(rho0, n_grid = c(10, 30, 50, 100),R = 2000, cutoff = 1.645, k = 30) {
+  alt_grid = seq(rho0, 1, length.out = k + 2)[-c(1, k + 2)] # 30 equispaced values
+  power_results = data.frame()
+  for (n in n_grid) {
+    for (rho1 in alt_grid) {
+      T_mat = matrix(NA_real_, nrow = R, ncol = 3)
+      for (j in 1:R) {
+        Z = mvrnorm(n, mu = c(0, 0),Sigma = matrix(c(1, rho1, rho1, 1), 2, 2))
+        r = cor(Z[, 1], Z[, 2]); g = atanh(r)
+        T_mat[j, ] = c(sqrt(n) * (r - rho0) / (1 - rho0^2), 
+                       sqrt(n - 3) * (g - atanh(rho0)), 
+                       sqrt(n - 3) * (g - atanh(rho0) - rho0 / (2 * (n - 1))))}
+      power_results = rbind(power_results, data.frame(
+        rho0 = rho0, n    = n, rho1 = rho1, T1   = mean(T_mat[, 1] > cutoff),
+        T2   = mean(T_mat[, 2] > cutoff),T3   = mean(T_mat[, 3] > cutoff)
+      ))}}
+  power_results
+}
+```
+
+After obtaining the simulated power, another function will be constructed to get the power curves for each value considered under null.
+
+```{r plot_power_function}
+plot_power = function(power_results) {
+  power_long = pivot_longer(power_results, cols = c(T1, T2, T3),
+                            names_to = "Statistic", values_to = "Power")
+  ggplot(power_long,aes(x = rho1,y = Power,colour = Statistic)) +
+    geom_line(linewidth = 0.8) + geom_point(size = 1.2) +
+    facet_wrap(~ n, labeller = label_bquote(n == .(n))) +
+    labs(x = expression(rho[1]), y = "Power") +
+    scale_colour_manual(values = c(T1 = "black", T2 = "red", T3 = "blue")) +
+    theme_bw() + theme(legend.position="bottom")
+}
+```
+
+Now, these functions will be applied on several values of $\rho_0$.
+
+```{r applying_functions}
+rho_values = c(0.1,0.3,0.6,0.9)
+power_list = lapply(rho_values, run_power)
+```
+
+```{r power_curves_0.1}
+#| fig-cap: "Power curves for testing a null correlation of 0.1"
+#| fig-width: 5
+#| fig-height: 3.5
+#| fig-align: center
+
+plot_power(power_list[[1]])
+```
+
+\vspace*{-0.5cm}
+
+```{r power_curves_0.3}
+#| fig-cap: "Power curves for testing a null correlation of 0.3"
+#| fig-width: 5
+#| fig-height: 4
+#| fig-align: center
+
+plot_power(power_list[[2]])
+```
+
+\vspace*{-0.5cm}
+
+```{r power_curves_0.6}
+#| fig-cap: "Power curves for testing a null correlation of 0.6"
+#| fig-width: 5
+#| fig-height: 4
+#| fig-align: center
+
+plot_power(power_list[[3]])
+```
+
+\vspace*{-0.3cm}
+
+```{r power_curves_0.9}
+#| fig-cap: "Power curves for testing a null correlation of 0.9"
+#| fig-width: 5
+#| fig-height: 4
+#| fig-align: center
+
+plot_power(power_list[[4]])
+```
+
+**Interpretations** :
+
+- As $n$ increases from 10 to 100, the power curves of all three statsitics become steeper and move closer together. In each of the four plots, at $n = 100$, they behaves very similarly, indicating their equivalence when sample size is high. This proves that the **three tests are consistent**.
+- When $\rho_0 = 0.1$, the three power curves are almost identical. As $\rho_0$ moves from 0.1 to towards 1, the curves separate, and the separation is most prominently visible at small n.
+- For $\rho = 0.9$ and $n = 10$, the powers for the test based on $T_2$ and $T_3$ are $83\%$ and $77\%$ higher on average than the power of the test based on $T_1$. This difference reduces with $n$. To be precise, for $n = 30$, it is $25\%$ and $22\%$ higher, and for $n = 100$, it is a mere $4\%$ and $5\%$ higher respectively.
+- The power study reinforces the conclusions of the asymptotic normality study. $T_2$ and $T_3$ take much smaller sample than $T_1$ to achieve normality, specifically for small $n$ and high $\rho$. That's why, for smaller $n$ also asymptotic normality based test on $T_2$ and $T_3$ achieve more power than the other.
+
+## Simulation Results for the Confidence Interval Analysis
+
+```{r}
+set.seed(902); n_grid = c(10, 30, 50, 100); rho_grid = c(0, 0.3, 0.6, 0.9)
+R = 5000; level = 0.95; z_crit = qnorm(1 - (1 - level) / 2)   # 1.96
+```
+
+```{r simulation_ci}
+ci_comp = function(n, rho, R, z_crit) {
+  out = matrix(NA_real_, nrow = R, ncol = 6)    # to store data for R replications
+  Sigma = matrix(c(1, rho, rho, 1), nrow = 2)  
+  for (k in 1:R) {
+    Z = mvrnorm(n, mu = c(0, 0), Sigma = Sigma) # drawing samples
+    r = cor(Z[, 1], Z[, 2])
+    # T1: delta-method interval
+    se_T1   = (1 - r^2) / sqrt(n)
+    T1_lower = r - z_crit * se_T1; T1_upper = r + z_crit * se_T1
+    # T2: Fisher interval
+    z_F   = atanh(r); se_F  = 1 / sqrt(n - 3)
+    T2_lower = tanh(z_F - z_crit * se_F); T2_upper = tanh(z_F + z_crit * se_F)
+    # T3: Bias corrected interval
+    z_A   = z_F - r / (2 * (n - 1))
+    T3_lower = tanh(z_A - z_crit * se_F); T3_upper = tanh(z_A + z_crit * se_F)
+    coverage = c(
+      T1_lower <= rho & rho <= T1_upper,
+      T2_lower <= rho & rho <= T2_upper,
+      T3_lower <= rho & rho <= T3_upper
+    )                                        # checks rho is in the CI or not
+    lengths = c(
+      T1_upper - T1_lower,
+      T2_upper - T2_lower,
+      T3_upper - T3_lower
+    )                                        # lengths of CI
+    out[k, ] = c(coverage, lengths)
+  }
+  data.frame(Statistic = c("T1", "T2", "T3"), coverage  = colMeans(out[, 1:3]),
+             mean_length = colMeans(out[, 4:6])
+  )
+}
+```
+
+```{r finding_ci}
+ci_table = data.frame()
+for (n in n_grid) {
+  for (rho in rho_grid) {
+    temp = ci_comp(n, rho, R, z_crit)
+    ci_table = rbind(ci_table, data.frame(
+      n = n, rho = rho,
+      Statistic = temp$Statistic,
+      coverage  = temp$coverage,
+      mean_length = temp$mean_length
+    ))
+  }
+}
+```
+
+```{r coverage_plot}
+#| fig-cap: "Empirical coverage of 95% CI against sample size  for different correlation coefficient"
+#| fig-width: 5
+#| fig-height: 3.7
+#| fig-align: center
+#| label: fig-coverage
+coverage_plot = ggplot(ci_table,aes(x = n, y = coverage,colour = Statistic)) +
+  geom_line(linewidth = 0.8) + geom_point(size = 1.6) +
+  geom_hline(yintercept = level, linetype = "dashed") +
+  facet_wrap(~ rho, labeller = label_bquote(rho == .(rho))) +
+  scale_colour_manual(values = c(T1 = "black", T2 = "red", T3 = "blue")) +
+  labs(x = "Sample size",
+       y = "Empirical coverage probability",
+       colour = "Confidence interval") +
+  theme_bw() +
+  theme(legend.position = "bottom")
+
+print(coverage_plot)
+```
+
+\vspace*{-0.4cm}
+
+```{r length_plot}
+#| fig-cap: "Average length of the 95% CIs for correlation coefficient against sample size"
+#| fig-width: 5
+#| fig-height: 3.6
+#| fig-align: center
+#| label: fig-length
+length_plot = ggplot(ci_table, aes(x = n, y = mean_length,colour = Statistic)) +
+  geom_line(linewidth = 0.8) + geom_point(size = 1.6) +
+  facet_wrap(~ rho, labeller = label_bquote(rho == .(rho))) +
+  scale_colour_manual(values = c(T1 = "black", T2 = "red", T3 = "blue")) +
+  labs(x = "Sample size", y = "Average confidence interval length", 
+       colour = "Confidence interval") +
+  theme_bw() + theme(legend.position = "bottom")
+print(length_plot)
+```
+
+**Interpretations** :
+
+1.  From @fig-coverage, the proportion of times population correlation coefficient is contained in the CI (empirical coverage probability) is depicted for each CI based on $T_1, T_2$ and $T_3$ against $n$, for several values of $\rho$. All three lines approach $0.95$, which validates the fact that confidence coefficient has been set correctly.
+2.  One of the most important features is coverage probability for CI based on $T_1$ is much lesser than the remaining two when sample size is small, but this is not the case for the others.
+3.  But, on the other hand coverage probability lines for CI based on $T_2$ and $T_3$ are hovering around the 0.95 most of the times.
+4.  From @fig-length, the average interval lengths are decreasing with $n$. As $\rho$ increases toward 1, there is a discrepancy between the lengths obtained from $T_1$ and the other two. For large sample, all of the CIs are producing almost same average length, but for small $n$, the average length due to $T_1$ is lesser than the remaining two.
+
+# Conclusions
+
+This simulation study addresses the difficulty of inference for the population correlation coefficient, as the unavailability of sampling distribution or complex structure of the distribution makes the hypothesis testing problematic. We compared three standardized quantities $T_1, T_2$ and $T_3$ -- across their approach to normality, the power of their corresponding tests and confidence intervals. The normal approximation study revealed $T_1$ performs poorly at small sample sizes; the bias-corrected $T_3$ consistently yields the smallest KS distance, approaching normality more rapidly. This thing translates into the power comparison also, in small samples with strong correlations, tests based on $T_2$ and $T_3$ achieve significantly higher power than $T_1$. The confidence intervals for $T_2$ and $T_3$ maintain coverage close to $0.95$, whereas $T_1$ reaches that level at a very high $n$. For small $n$, the coverage probability is lower than the other two for the test based on $T_1$.
+
+Overall, this study shows the asymptotic approximations and the test based on those asymptotic approximations can successfully circumvent the hurdle.
+
+# Future Scopes
+The following section discusses some future scopes, that is few more simulation studies to explore other aspects of this.
+
+- All of the simulation studies involve only the positive correlations, one possible extension can be to explore these for the negative correlations as well.
+- One important question from the testing point of view will be how many samples on an average does a test require to achieve a fixed power (say 0.95). Let suppose, test 1 and test 2 requires on an average $n_1$ and $n_2$ samples respectively to achieve that power. The empirical asymptotic relative efficiency (ARE) is then given by $n_1/n_2$. $\text{ARE} > 1$ implies the test 2 is more efficient than test 1, as it requires fewer samples to achieve the same power, whereas $\text{ARE} < 1$, test 1 is more efficient. Comparing ARE for the three tests provide another perspective on their performance.
+
+
+# References
+
+
+\renewcommand{\thefootnote}{}
+\footnotetext{\hspace*{-0.5cm}GitHub repository for this project work: \href{https://github.com/TathastuGhosh/Inference-for-Correlation}{TathastuGhosh/Inference-for-Correlation}}
+
+
+
+
+
+
