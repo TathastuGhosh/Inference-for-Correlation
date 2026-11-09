@@ -1,0 +1,53 @@
+
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\usepackage{xcolor}
+\usepackage[numbers]{natbib}
+
+\definecolor{NavyBlue}{RGB}{25,45,85}
+\definecolor{TealBlue}{RGB}{0,115,125}
+\definecolor{LightGray}{RGB}{180,188,198}
+\definecolor{MainColor}{RGB}{48,35,120}
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MainColor,
+    urlcolor=MainColor,
+    citecolor=MainColor
+}
+
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection.}{0.6em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small{SDS755: Statistical Inference}}
+\fancyhead[R]{\small{Inference for Correlation}}
+\fancyfoot[C]{\thepage}
+
+%\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\headrule}{%
+        \vspace{0.2\baselineskip}%
+        \hrule height 1pt
+        \vspace{1.4pt}
+        \hrule height 0.3pt
+        \vspace{4pt}
+    }
+
+\renewcommand{\footrulewidth}{0.2pt}
